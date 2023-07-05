@@ -1,0 +1,10 @@
+const typeError = {
+    INVALID_TYPES_ERROR: 1,
+    MISSING_REQUIRED_FIELDS_ERROR: 2,
+    FIELD_VALIDATION_FAILED_ERROR: 3,
+    ROUTING_ERROR: 4,
+    DATABASE_ERROR: 5,
+    UNKNOWN_ERROR: -999 
+}
+
+export default typeError;
