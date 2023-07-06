@@ -5,6 +5,7 @@ import MongoStore from 'connect-mongo';
 import passport from 'passport';
 import cookieParser from 'cookie-parser';
 import mongoose from 'mongoose';
+import cors from 'cors';
 
 //SOCKET
 import { Server } from 'socket.io';
@@ -45,6 +46,7 @@ app.use(cookieParser('CoderS3cR3tC0D3'))
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
+app.use(cors({origin:'/',methods:['GET','POST','PUT', 'DELETE']}))
 
 app.use('/api/session/', sessionRouter);
 app.use('/api/notes/', notesRouter);
