@@ -46,7 +46,7 @@ app.use(cookieParser('CoderS3cR3tC0D3'))
 
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
-app.use(cors({origin:'/',methods:['GET','POST','PUT', 'DELETE']}))
+app.use(cors())
 
 app.use('/api/session/', sessionRouter);
 app.use('/api/notes/', notesRouter);
