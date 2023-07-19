@@ -20,20 +20,21 @@ import notesRouter from './routes/note.router.js';
 
 //ERRORS
 import handleErrors from './middlewares/errors.middleware.js';
+// console.log(config);
 
 const app = express();
-const PORT = 8000;
+// const PORT = 8000;
 
-const server = app.listen(PORT, ()=> console.log('server arriba'));
-const io = new Server(server);
+const server = app.listen(config.port || 8000, ()=> console.log('server arriba'));
+// const io = new Server(server);
 
 app.use(session({
     store: MongoStore.create({
-        mongoUrl: config.mongoUrl,
+        mongoUrl: config.mongoUrl || 'mongodb+srv://alejoomartinex11:o9N7rH01CNM6WxEN@cluster0.bcwkccw.mongodb.net/?retryWrites=true&w=majority',
         mongoOptions:{useNewUrlParser:true,useUnifiedTopology:true},
         ttl:20
     }),
-    secret: config.secretSession,
+    secret: config.secretSession || 'secretSession',
     resave: false,
     saveUninitialized: false
 }))
@@ -51,7 +52,7 @@ app.use(cors())
 app.use('/api/session/', sessionRouter);
 app.use('/api/notes/', notesRouter);
 
-mongoose.connect(config.mongoUrl, {
+mongoose.connect(config.mongoUrl || 'mongodb+srv://alejoomartinex11:o9N7rH01CNM6WxEN@cluster0.bcwkccw.mongodb.net/?retryWrites=true&w=majority', {
     useNewUrlParser:true,
     useUnifiedTopology:true,
 })

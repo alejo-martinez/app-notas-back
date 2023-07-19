@@ -20,7 +20,7 @@ const ExtractJWT = jwt.ExtractJwt;
 const userManager = new UserManager();
 
 const initPassport = ()=>{
-    passport.use('jwt', new JWTStrategy({jwtFromRequest:ExtractJWT.fromExtractors([utils.cookieExtractor]), secretOrKey: config.keyJwt}, async(jwt_payload, done)=>{
+    passport.use('jwt', new JWTStrategy({jwtFromRequest:ExtractJWT.fromExtractors([utils.cookieExtractor]), secretOrKey: config.keyJwt || 'KeyParaJwt'}, async(jwt_payload, done)=>{
         try {
             return done(null, jwt_payload.user);
         } catch (error) {
