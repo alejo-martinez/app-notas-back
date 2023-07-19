@@ -8,7 +8,7 @@ const userLogin = async(req, res)=>{
     try {
         const usuario = req.user;
         const acces_token =  utils.generateToken(usuario);
-        res.cookie('accesToken', acces_token, {maxAge:60*60*1000, signed: true, httpOnly: true}).send({status:'succes'})
+        res.cookie('accesToken', acces_token, {maxAge:60*60*1000, signed: true, httpOnly: true, sameSite:'none', secure:true}).send({status:'succes'})
     } catch (error) {
         res.send({status:'error', error: 'Error al hacer login ' + error})
     }
