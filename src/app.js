@@ -36,7 +36,12 @@ app.use(session({
     }),
     secret: config.secretSession || 'secretSession',
     resave: false,
-    saveUninitialized: false
+    saveUninitialized: false,
+    cookie:{
+        maxAge :1*60*60 * 1000,
+        secure: true,
+        sameSite: 'none'
+    }
 }))
 
 initPassport();
@@ -48,7 +53,7 @@ app.use(cookieParser('CoderS3cR3tC0D3'))
 app.use(express.json())
 app.use(express.urlencoded({extended: true}))
 app.use(cors({
-    origin:'http://localhost:3000',
+    origin:'https://localhost:3000',
     credentials:true
 }))
 
