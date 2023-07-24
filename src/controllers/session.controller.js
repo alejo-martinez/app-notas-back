@@ -8,7 +8,7 @@ const userLogin = async(req, res)=>{
     try {
         const usuario = req.user;
         const acces_token =  utils.generateToken(usuario);
-        res.cookie('accesToken', acces_token, {maxAge:60*60*1000, signed: true, httpOnly: true, sameSite:'none', secure:true}).send({status:'succes', payload:{name:usuario.name, last_name: usuario.last_name, nickname: usuario.nickname, email: usuario.email}})
+        res.cookie('accesToken', acces_token, {maxAge:60*60*1000, signed: true, httpOnly: true, sameSite:'none', secure:true}).send({status:'succes', payload:{name:usuario.name, last_name: usuario.last_name, nickname: usuario.nickname, email: usuario.email, id: usuario._id}})
     } catch (error) {
         res.send({status:'error', error: 'Error al hacer login ' + error})
     }
@@ -26,7 +26,7 @@ const logOut = async(req, res)=>{
 
 const current = async(req, res) =>{
     const user = req.user;
-    res.send({status:'succes', payload: user})
+    res.send({status:'succes', payload: {name:user.name, last_name: user.last_name, nickname: user.nickname, email: user.email, id: user._id}})
 }
 
 export default {
