@@ -12,7 +12,14 @@ const getAll = async(req, res, next)=>{
     try {
         const notas = await nm.get();
         if(!notas) customError.createError({name:'Error', cause:'La base de datos no puede encontrar las notas', message:'Error al buscar todas las notas', code:5})
-        else return res.status(200).send({status:'succes', payload: notas});
+        else {
+            const validNotes = [];
+            notas.forEach(nota => {
+                if(nota.created_by === req.user._id) validNotes.push(nota);
+                if(nota.share_with === req.user._id) validNotes.push(nota);
+            });
+            res.status(200).send({status:'succes', payload:  validNotes});
+        }
     } catch (error) {
         next(error);
     }
